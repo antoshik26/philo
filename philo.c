@@ -1,32 +1,39 @@
 #include "philo.h"
 
+void allocate(t_all_progect *all)
+{
+	all->philos = NULL;
+	all->forks = NULL;
+}
+
 void clean(t_all_progect *all)
 {
 	t_forks *fork;
+	t_forks *fork_tmp;
 	t_philo *philo;
+	t_philo *philo_tmp;
 
 	philo = all->philos;
 	fork = all->forks;
-	while(all->forks)
+	while(fork)
 	{
-		fork = all->forks->next;
+		fork_tmp = fork->next;
 		free(fork);
-		all->forks = fork;
+		fork = fork_tmp;
 	}
-	while (all->philos)
+	while (philo)
 	{
-		philo = all->philos;
+		philo_tmp = philo->next;
 		free(philo);
-		all->philos = philo;
+		philo = philo_tmp;
 	}
 }
 
 int main(int argc, char **argv)
 {
 	t_all_progect progect;
-	int i;
 
-	i = 0;
+	allocate(&progect);
 	if (parser(&progect, argc, argv) == -1)
 		return (-1);
 	live_philo(&progect);

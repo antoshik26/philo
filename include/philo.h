@@ -7,24 +7,26 @@
 # include <stdarg.h>
 # include <pthread.h>
 
-typedef struct	s_philo
-{
-	int			numer_philo;
-	int			time_to_die;
-	int			time_to_eat;
-	int			time_to_sleap;
-	int			time_to_last_eat;
-	int					count_eat;
-	pthread_t			flow_philo;
-	struct s_philo		*next;
-}				t_philo;
-
 typedef struct	s_forks
 {
 	int					numer_forks;
 	pthread_mutex_t		mutex_fork;
 	struct s_forks		*next;
 }				t_forks;
+
+typedef struct	s_philo
+{
+	int					numer_philo;
+	int					time_to_die;
+	int					time_to_eat;
+	int					time_to_sleap;
+	int					time_to_last_eat;
+	int					count_eat;
+	pthread_t			flow_philo;
+	t_forks				*left_hand;
+	t_forks				*right_hand;
+	struct s_philo		*next;
+}				t_philo;
 
 typedef struct	s_all_progect
 {

@@ -3,6 +3,7 @@
 t_philo	*ft_lstnew_philo(int numer_philo, t_all_progect *all)
 {
 	t_philo *new_list;
+	t_forks *fork;
 
 	new_list = (t_philo *)malloc(sizeof(t_philo));
 	if (new_list == NULL)
@@ -13,6 +14,13 @@ t_philo	*ft_lstnew_philo(int numer_philo, t_all_progect *all)
 	new_list->time_to_sleap = all->time_to_sleap;
 	new_list->count_eat = all->count_philo_eat;
 	new_list->time_to_last_eat = 0;
+	while(fork->numer_forks == numer_philo)
+	{
+		fork = fork->next;
+	}
+	new_list->left_hand = fork;
+	fork = fork->next;
+	new_list->right_hand = fork;
 	new_list->next = NULL;
 	return (new_list);
 }
