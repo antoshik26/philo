@@ -39,8 +39,8 @@ int creat_fork(t_all_progect *all)
 		fork = ft_lstnew(philo->numer_philo);
 		if (fork == -1)
 			return (-1);
-		ft_lstadd_back(&all->forks, fork);
-		i--;
+		ft_lstadd_back_forks(&all->forks, fork);
+		i++;
 	}
 	return (0);
 }
@@ -57,7 +57,7 @@ int creat_philo(t_all_progect *all)
 		philo_one = ft_lstnew(j, argc);
 		if (philo_one == -1)
 			return (-1);
-		ft_lstadd_back(&all->philos, philo_one);
+		ft_lstadd_back_philo(&all->philos, philo_one);
 		i++;
 	}
 	return (0);

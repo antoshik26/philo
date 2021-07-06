@@ -39,4 +39,9 @@ typedef struct	s_all_progect
 
 int				parser(t_all_progect *all, int argc, char **argv);
 int				live_philo(t_philo *philo, t_forks *forks);
+t_philo			*ft_lstnew_philo(int numer_philo, t_all_progect *all);
+t_forks			*ft_lstnew_fork(int numer_fork);
+void			ft_lstadd_back_philo(t_philo **lst, t_philo *new);
+void			ft_lstadd_back_forks(t_forks **lst, t_forks *new);
+int				ft_itoa(char *chilo);
 #endif

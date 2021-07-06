@@ -47,9 +47,53 @@ int birth_philo(t_all_progect *all)
 	return (0);
 }
 
+int death_philo(t_all_progect *all)
+{
+	t_philo philo;
+
+	philo = all->philos;
+	while (philo)
+	{
+		if (pthread_detuch(philo->flow_philo) == -1)
+			return (-1);
+		philo = philo->next;
+	}
+	return (0);
+}
+
+int free_forks(t_all_progect *all)
+{
+	t_forks *fork;
+
+	fork = all->forks;
+	while(fork)
+	{
+		if (pthread_mutex_destroy(fork->mutex_fork) == -1)
+			return (-1);
+		fork = fork->next;
+	}
+	return (0);
+}
+
+int init_mutex_forks(t_all_progect *all)
+{
+	t_forks *fork;
+
+	fork = all->forks;
+	while(fork)
+	{
+		if (pthread_mutex_init(&fork->mutex_fork))
+			return (-1);
+		fork = fork->next;
+	}
+	return (0);
+}
+
 int live_philo(t_all_progect *all)
 {
+	init_mutex_forks(all);
 	birth_philo(all);
 	death_philo(all);
+	free_forks(all);
 	return (0);
 }
