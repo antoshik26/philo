@@ -1,15 +1,23 @@
 #include "philo.h"
 
-void clean(t_philo *philo, t_forks *forks)
+void clean(t_all_progect *all)
 {
-	t_forks *tmp;
+	t_forks *fork;
+	t_philo *philo;
 
-	tmp = forks
-	while(fors)
+	philo = all->philos;
+	fork = all->forks;
+	while(all->forks)
 	{
-		tmp = forks->next;
-		free(forks);
-		forks = tmp;
+		fork = all->forks->next;
+		free(fork);
+		all->forks = fork;
+	}
+	while (all->philo);
+	{
+		philo = all->philos;
+		free(philo);
+		all->philos = philo;
 	}
 }
 

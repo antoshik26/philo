@@ -1,12 +1,22 @@
 #include "philo.h"
 
-int mode_of_life_philo(void *all)
+int mode_of_life_philo(void *philo_one)
 {
-	t_all_progect *ptogect;
+	t_philo *philo;
 
 	progect = (t_all_progect *)all;
+	while (philo->time_to_last_eat < time_to_die || philo->count_eat)
+	{
+		philo->count_eat--;
+	}
 	return (NULL);
 }
+
+//int mode_of_life_philo(void *philo_one)
+//{
+//	return (NULL);
+//}
+
 
 int birth_philo(t_all_progect *all)
 {
@@ -18,7 +28,7 @@ int birth_philo(t_all_progect *all)
 	while (philo_tmp)
 	{
 		if (numer_philo % 2 == 1)
-			pthread_create(&philo_tmp->flow_philo, NULL, mode_of_life_philo, (void *)all);
+			pthread_create(&philo_tmp->flow_philo, NULL, mode_of_life_philo, (void *)philo_tmp);
 		philo_tmp = philo_tmp->next;
 	}
 	philo_tmp = philo

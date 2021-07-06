@@ -14,6 +14,7 @@ typedef struct	s_philo
 	int			time_to_eat;
 	int			time_to_sleap;
 	int			time_to_last_eat;
+	int			count_eat;
 	pthread_t	flow_philo;
 	s_philo		*next;
 }				t_philo;
