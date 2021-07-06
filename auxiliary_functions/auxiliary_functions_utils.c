@@ -20,7 +20,10 @@ t_philo	*ft_lstnew_philo(int numer_philo, t_all_progect *all)
 	}
 	new_list->left_hand = fork;
 	fork = fork->next;
-	new_list->right_hand = fork;
+	if (fork == NULL)
+		new_list->right_hand = all->forks;
+	else
+		new_list->right_hand = fork;
 	new_list->next = NULL;
 	return (new_list);
 }
