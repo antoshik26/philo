@@ -31,7 +31,7 @@ t_forks	*ft_lstnew_fork(int numer_fork)
 
 void	ft_lstadd_back_philo(t_philo **lst, t_philo *new)
 {
-	t_list *a;
+	t_philo *a;
 
 	a = *lst;
 	if (!*lst && new)
@@ -52,7 +52,7 @@ void	ft_lstadd_back_philo(t_philo **lst, t_philo *new)
 
 void	ft_lstadd_back_forks(t_forks **lst, t_forks *new)
 {
-	t_list *a;
+	t_forks *a;
 
 	a = *lst;
 	if (!*lst && new)

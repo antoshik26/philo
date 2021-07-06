@@ -9,6 +9,7 @@ AUXILIARY_FUNCTIONS = auxiliary_functions
 SRCS =	${PARSER}/parser.c \
 		${LIVE_PHILO}/live_philo.c \
 		${AUXILIARY_FUNCTIONS}/auxiliary_functions.c \
+		${AUXILIARY_FUNCTIONS}/ft_atoi.c \
 		${AUXILIARY_FUNCTIONS}/auxiliary_functions_utils.c \
 		philo.c
 

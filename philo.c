@@ -13,7 +13,7 @@ void clean(t_all_progect *all)
 		free(fork);
 		all->forks = fork;
 	}
-	while (all->philo);
+	while (all->philos)
 	{
 		philo = all->philos;
 		free(philo);
@@ -27,7 +27,7 @@ int main(int argc, char **argv)
 	int i;
 
 	i = 0;
-	if (parser(&progect) == -1)
+	if (parser(&progect, argc, argv) == -1)
 		return (-1);
 	live_philo(&progect);
 	clean(&progect);
