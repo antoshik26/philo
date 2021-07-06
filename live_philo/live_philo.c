@@ -4,7 +4,8 @@ void *mode_of_life_philo(void *philo_one)
 {
 	// t_philo *philo;
 
-	void *a = philo_one;
+	void *a;
+	a = philo_one;
 	// progect = (t_all_progect *)all;
 	// while (philo->time_to_last_eat < time_to_die || philo->count_eat)
 	// {
