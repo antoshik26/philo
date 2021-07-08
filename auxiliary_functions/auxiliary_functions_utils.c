@@ -5,6 +5,7 @@ t_philo	*ft_lstnew_philo(int numer_philo, t_all_progect *all)
 	t_philo *new_list;
 	t_forks *fork;
 
+	fork = all->forks;
 	new_list = (t_philo *)malloc(sizeof(t_philo));
 	if (new_list == NULL)
 		return (NULL);
@@ -14,7 +15,7 @@ t_philo	*ft_lstnew_philo(int numer_philo, t_all_progect *all)
 	new_list->time_to_sleap = all->time_to_sleap;
 	new_list->count_eat = all->count_philo_eat;
 	new_list->time_to_last_eat = 0;
-	while(fork->numer_forks == numer_philo)
+	while (fork->numer_fork != numer_philo)
 	{
 		fork = fork->next;
 	}
@@ -35,7 +36,8 @@ t_forks	*ft_lstnew_fork(int numer_fork)
 	new_list = (t_forks *)malloc(sizeof(t_forks));
 	if (new_list == NULL)
 		return (NULL);
-	new_list->numer_forks = numer_fork;
+	new_list->numer_fork = numer_fork;
+	pthread_mutex_init(&new_list->mutex_fork, NULL);
 	new_list->next = NULL;
 	return (new_list);
 }

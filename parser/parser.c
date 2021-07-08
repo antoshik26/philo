@@ -33,8 +33,8 @@ int creat_fork(t_all_progect *all)
 	int i;
 	t_forks *fork;
 
-	i = 0;
-	while (i < all->count_philos)
+	i = 1;
+	while (i < all->count_philos + 1)
 	{
 		fork = ft_lstnew_fork(i);
 		if (fork == NULL)
@@ -50,8 +50,8 @@ int creat_philo(t_all_progect *all)
 	int i;
 	t_philo *philo_one;
 	
-	i = 0;
-	while (i < all->count_philos)
+	i = 1;
+	while (i < all->count_philos + 1)
 	{
 		philo_one = ft_lstnew_philo(i, all);
 		if (philo_one == NULL)
@@ -68,13 +68,13 @@ int parser(t_all_progect *all, int argc, char **argv)
 	
 	if (argc < 4 || argc > 6) 
 	{
-		write(1, "неверное количество аргументов", 1);
+		write(1, "Неверное количество аргументов", 30);
 		return (-1);
 	}
 	i = ft_atoi(argv[1]);
 	if (i < 0)
 	{
-		write(1, "неверное количество философов", 1);
+		write(1, "Неверное количество философов", 29);
 		return (-1);
 	}
 	if (parser_philo(all, argc, argv) == -1)

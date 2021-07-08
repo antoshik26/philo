@@ -2,15 +2,41 @@
 
 void *mode_of_life_philo(void *philo_one)
 {
-	// t_philo *philo;
+	t_philo *philo;
 
-	void *a;
-	a = philo_one;
-	// progect = (t_all_progect *)all;
-	// while (philo->time_to_last_eat < time_to_die || philo->count_eat)
+	philo = (t_philo *)philo_one;
+	// while (1)
 	// {
-
-	// 	philo->count_eat--;
+	 	pthread_mutex_lock(&philo->left_hand->mutex_fork);
+	 	//pthread_mutex_lock(philo->mutex_philo_said);
+		printf("Philo %d take fork %d\n", philo->numer_philo, philo->left_hand->numer_fork);	//take fork_first
+	 	//pthread_mutex_unlock(philo->mutex_philo_said);
+	// 	pthread_mutex_lock(&philo->right_hand->mutex_fork);
+	// 	pthread_mutex_lock(philo->mutex_philo_said);
+	// 	printf("Philo %d take fork %d\n", philo->numer_philo, philo->right_hand->numer_fork);	//take fork_second
+	// 	printf("Philo %d eating\n", philo->numer_philo);
+	// 	usleep(philo->time_to_eat * 1000);
+	// 	pthread_mutex_unlock(philo->mutex_philo_said);
+	// 	pthread_mutex_unlock(&philo->right_hand->mutex_fork);
+	 	pthread_mutex_unlock(&philo->left_hand->mutex_fork);
+	// 	if (philo->count_eat != -1)
+	// 	{
+	// 		philo->count_eat--;
+	// 		if (philo->count_eat == 0)
+	// 			break ;
+	// 	}
+	// 	pthread_mutex_lock(philo->mutex_philo_said);
+	// 	printf("Philo %d sleaping\n", philo->numer_philo);	//sleaping
+	// 	pthread_mutex_unlock(philo->mutex_philo_said);
+	// 	if (philo->time_to_last_eat > philo->time_to_die)
+	// 	{
+	// 		pthread_mutex_lock(philo->mutex_philo_said);
+	// 		printf("Philo %d died\n", philo->numer_philo); //died
+	// 		pthread_mutex_unlock(philo->mutex_philo_said);
+	// 		return (NULL);
+	// 	}
+	// 	philo->time_to_last_eat++;
+	// 	usleep(1000);
 	// }
 	return (NULL);
 }
@@ -38,7 +64,7 @@ int birth_philo(t_all_progect *all)
 	while (philo_tmp)
 	{
 		if (philo_tmp->numer_philo % 2 == 0)
-			pthread_create(&philo_tmp->flow_philo, NULL, mode_of_life_philo, (void *)all);
+			pthread_create(&philo_tmp->flow_philo, NULL, mode_of_life_philo, (void *)philo_tmp);
 		philo_tmp = philo_tmp->next;
 	}
 	philo_tmp = all->philos;
@@ -47,6 +73,7 @@ int birth_philo(t_all_progect *all)
 		pthread_join(philo_tmp->flow_philo, NULL);
 		philo_tmp = philo_tmp->next;
 	}
+	usleep(10000);
 	return (0);
 }
 
@@ -96,7 +123,7 @@ int live_philo(t_all_progect *all)
 {
 	init_mutex_forks(all);
 	birth_philo(all);
-	death_philo(all);
-	free_forks(all);
+	//death_philo(all);
+	//free_forks(all);
 	return (0);
 }

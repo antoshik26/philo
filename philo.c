@@ -1,9 +1,11 @@
 #include "philo.h"
+t_all_progect g_progect;
 
 void allocate(t_all_progect *all)
 {
 	all->philos = NULL;
 	all->forks = NULL;
+	pthread_mutex_init(&all->mutex_philo_said, NULL);
 }
 
 void clean(t_all_progect *all)
@@ -17,6 +19,7 @@ void clean(t_all_progect *all)
 	fork = all->forks;
 	while(fork)
 	{
+		pthread_mutex_destroy(&fork->mutex_fork);
 		fork_tmp = fork->next;
 		free(fork);
 		fork = fork_tmp;
@@ -31,12 +34,12 @@ void clean(t_all_progect *all)
 
 int main(int argc, char **argv)
 {
-	t_all_progect progect;
+	t_all_progect g_progect;
 
-	allocate(&progect);
-	if (parser(&progect, argc, argv) == -1)
+	allocate(&g_progect);
+	if (parser(&g_progect, argc, argv) == -1)
 		return (-1);
-	live_philo(&progect);
-	clean(&progect);
+	live_philo(&g_progect);
+	//clean(&progect);
 	return (0);
 }

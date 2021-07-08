@@ -9,7 +9,7 @@
 
 typedef struct	s_forks
 {
-	int					numer_forks;
+	int					numer_fork;
 	pthread_mutex_t		mutex_fork;
 	struct s_forks		*next;
 }				t_forks;
@@ -23,6 +23,7 @@ typedef struct	s_philo
 	int					time_to_last_eat;
 	int					count_eat;
 	pthread_t			flow_philo;
+	pthread_mutex_t		*mutex_philo_said;
 	t_forks				*left_hand;
 	t_forks				*right_hand;
 	struct s_philo		*next;
@@ -30,13 +31,14 @@ typedef struct	s_philo
 
 typedef struct	s_all_progect
 {
-	int			count_philos;
-	int			time_to_die;
-	int			time_to_eat;
-	int			time_to_sleap;
-	int			count_philo_eat;
-	t_philo		*philos;
-	t_forks		*forks;
+	int				count_philos;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleap;
+	int				count_philo_eat;
+	t_philo			*philos;
+	t_forks			*forks;
+	pthread_mutex_t	mutex_philo_said;
 }				t_all_progect;
 
 int				parser(t_all_progect *all, int argc, char **argv);
