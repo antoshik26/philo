@@ -19,15 +19,16 @@ void *mode_of_life_philo(void *philo_one)
 	 	pthread_mutex_unlock(philo->mutex_philo_said);
 	 	pthread_mutex_unlock(&philo->right_hand->mutex_fork);
 	 	pthread_mutex_unlock(&philo->left_hand->mutex_fork);
+
 	// 	if (philo->count_eat != -1)
 	// 	{
 	// 		philo->count_eat--;
 	// 		if (philo->count_eat == 0)
 	// 			break ;
 	// 	}
-	// 	pthread_mutex_lock(philo->mutex_philo_said);
-	// 	printf("Philo %d sleaping\n", philo->numer_philo);	//sleaping
-	// 	pthread_mutex_unlock(philo->mutex_philo_said);
+	 	pthread_mutex_lock(philo->mutex_philo_said);
+	 	printf("Philo %d sleaping\n", philo->numer_philo);	//sleaping
+	 	pthread_mutex_unlock(philo->mutex_philo_said);
 	// 	if (philo->time_to_last_eat > philo->time_to_die)
 	// 	{
 	// 		pthread_mutex_lock(philo->mutex_philo_said);
