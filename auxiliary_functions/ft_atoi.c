@@ -4,8 +4,6 @@ int		chek_znak(const char str, size_t *i)
 {
 	size_t	key;
 
-
-
 	key = 0;
 	if (str == '+' || str == '-')
 	{

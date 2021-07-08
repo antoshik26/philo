@@ -8,16 +8,16 @@ void *mode_of_life_philo(void *philo_one)
 	// while (1)
 	// {
 	 	pthread_mutex_lock(&philo->left_hand->mutex_fork);
-	 	//pthread_mutex_lock(philo->mutex_philo_said);
-		printf("Philo %d take fork %d\n", philo->numer_philo, philo->left_hand->numer_fork);	//take fork_first
-	 	//pthread_mutex_unlock(philo->mutex_philo_said);
-	// 	pthread_mutex_lock(&philo->right_hand->mutex_fork);
-	// 	pthread_mutex_lock(philo->mutex_philo_said);
-	// 	printf("Philo %d take fork %d\n", philo->numer_philo, philo->right_hand->numer_fork);	//take fork_second
-	// 	printf("Philo %d eating\n", philo->numer_philo);
-	// 	usleep(philo->time_to_eat * 1000);
-	// 	pthread_mutex_unlock(philo->mutex_philo_said);
-	// 	pthread_mutex_unlock(&philo->right_hand->mutex_fork);
+	 	pthread_mutex_lock(philo->mutex_philo_said);
+		printf("Philo %d take fork %d\n", philo->numer_philo, philo->left_hand->numer_fork);
+	 	pthread_mutex_unlock(philo->mutex_philo_said);
+	 	pthread_mutex_lock(&philo->right_hand->mutex_fork);
+	 	pthread_mutex_lock(philo->mutex_philo_said);
+	 	printf("Philo %d take fork %d\n", philo->numer_philo, philo->right_hand->numer_fork);
+	 	printf("Philo %d eating\n", philo->numer_philo);
+	 	usleep(philo->time_to_eat * 1000);
+	 	pthread_mutex_unlock(philo->mutex_philo_said);
+	 	pthread_mutex_unlock(&philo->right_hand->mutex_fork);
 	 	pthread_mutex_unlock(&philo->left_hand->mutex_fork);
 	// 	if (philo->count_eat != -1)
 	// 	{
@@ -59,6 +59,7 @@ int birth_philo(t_all_progect *all)
 		if (philo_tmp->numer_philo % 2 == 1)
 			pthread_create(&philo_tmp->flow_philo, NULL, mode_of_life_philo, (void *)philo_tmp);
 		philo_tmp = philo_tmp->next;
+		usleep(1000);
 	}
 	philo_tmp = all->philos;
 	while (philo_tmp)
@@ -66,6 +67,7 @@ int birth_philo(t_all_progect *all)
 		if (philo_tmp->numer_philo % 2 == 0)
 			pthread_create(&philo_tmp->flow_philo, NULL, mode_of_life_philo, (void *)philo_tmp);
 		philo_tmp = philo_tmp->next;
+		usleep(1000);
 	}
 	philo_tmp = all->philos;
 	while(philo_tmp)
