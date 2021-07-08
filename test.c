@@ -9,6 +9,9 @@ int main(void)
 {
 	struct timeval time;
 	struct timezone time_zone;
-	
+	int i;
+
+	i = 0;
+	i = gettimeofday(&time, &time_zone);
 	return (0);
 }
