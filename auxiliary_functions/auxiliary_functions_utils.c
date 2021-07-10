@@ -16,6 +16,9 @@ t_philo	*ft_lstnew_philo(int numer_philo, t_all_progect *all)
 	new_list->count_eat = all->count_philo_eat;
 	new_list->time_to_last_eat = 0;
 	new_list->mutex_philo_said = &all->mutex_philo_said;
+	new_list->key_die_philo = &all->key_die_philo;
+	new_list->time = &all->time;
+	new_list->time_zone = &all->time_zone;
 	while (fork->numer_fork != numer_philo)
 	{
 		fork = fork->next;
