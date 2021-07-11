@@ -14,11 +14,10 @@ t_philo	*ft_lstnew_philo(int numer_philo, t_all_progect *all)
 	new_list->time_to_eat = all->time_to_eat;
 	new_list->time_to_sleap = all->time_to_sleap;
 	new_list->count_eat = all->count_philo_eat;
-	new_list->time_to_last_eat = 0;
 	new_list->mutex_philo_said = &all->mutex_philo_said;
 	new_list->key_die_philo = &all->key_die_philo;
-	new_list->time = &all->time;
-	new_list->time_zone = &all->time_zone;
+	new_list->time_start = gettime();
+	new_list->time_to_last_eat = new_list->time_start;
 	while (fork->numer_fork != numer_philo)
 	{
 		fork = fork->next;
@@ -87,3 +86,4 @@ void	ft_lstadd_back_forks(t_forks **lst, t_forks *new)
 			a = a->next;
 	}
 }
+

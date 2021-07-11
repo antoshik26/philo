@@ -1,5 +1,4 @@
 #include "philo.h"
-t_all_progect g_progect;
 
 int allocate(t_all_progect *all)
 {
@@ -42,13 +41,13 @@ void clean(t_all_progect *all)
 
 int main(int argc, char **argv)
 {
-	t_all_progect g_progect;
+	t_all_progect progect;
 
-	if (allocate(&g_progect))
+	if (allocate(&progect))
 		return (-1);
-	if (parser(&g_progect, argc, argv) == -1)
+	if (parser(&progect, argc, argv) == -1)
 		return (-1);
-	live_philo(&g_progect);
-	//clean(&progect);
+	live_philo(&progect);
+	clean(&progect);
 	return (0);
 }
