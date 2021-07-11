@@ -19,7 +19,6 @@ void *mode_of_life_philo(void *philo_one)
 	 	pthread_mutex_unlock(philo->mutex_philo_said);
 	 	pthread_mutex_unlock(&philo->right_hand->mutex_fork);
 	 	pthread_mutex_unlock(&philo->left_hand->mutex_fork);
-
 	// 	if (philo->count_eat != -1)
 	// 	{
 	// 		philo->count_eat--;
