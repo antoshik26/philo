@@ -1,12 +1,25 @@
 #include "philo.h"
 
+int check_die_philo(t_philo *philo)
+{
+	if (philo->time_to_last_eat > philo->time_to_die)
+	{
+	 	pthread_mutex_lock(philo->mutex_philo_said);
+	 	printf("Philo %d died\n", philo->numer_philo); //died
+	 	pthread_mutex_unlock(philo->mutex_philo_said);
+		*(philo->key_die_philo) = 1;
+	 	return (-1);
+	}
+	return (0);
+}
+
 void *mode_of_life_philo(void *philo_one)
 {
 	t_philo *philo;
 
 	philo = (t_philo *)philo_one;
-	// while (1)
-	// {
+	while (philo->key_die_philo == 0)
+	{
 	 	pthread_mutex_lock(&philo->left_hand->mutex_fork);
 	 	pthread_mutex_lock(philo->mutex_philo_said);
 		printf("Philo %d take fork %d\n", philo->numer_philo, philo->left_hand->numer_fork);
@@ -16,28 +29,33 @@ void *mode_of_life_philo(void *philo_one)
 	 	printf("Philo %d take fork %d\n", philo->numer_philo, philo->right_hand->numer_fork);
 	 	printf("Philo %d eating\n", philo->numer_philo);
 	 	usleep(philo->time_to_eat * 1000);
+		philo->time_to_last_eat = time->tv_usec;
 	 	pthread_mutex_unlock(philo->mutex_philo_said);
 	 	pthread_mutex_unlock(&philo->right_hand->mutex_fork);
 	 	pthread_mutex_unlock(&philo->left_hand->mutex_fork);
-	// 	if (philo->count_eat != -1)
-	// 	{
-	// 		philo->count_eat--;
-	// 		if (philo->count_eat == 0)
-	// 			break ;
-	// 	}
+	 	if (philo->count_eat != -1)
+	 	{
+	 		philo->count_eat--;
+	 		if (philo->count_eat == 0)
+	 			break ;
+	 	}
 	 	pthread_mutex_lock(philo->mutex_philo_said);
 	 	printf("Philo %d sleaping\n", philo->numer_philo);	//sleaping
 	 	pthread_mutex_unlock(philo->mutex_philo_said);
+		usleep(philo->time_to_sleap * 1000);
+		pthread_mutex_lock(philo->mutex_philo_said);
+		printf("Philo %d thinkeng\n", philo->numer_philo);
+		pthread_mutex_unlock(philo->mutex_philo_said);
+		usleep(1000);
 	// 	if (philo->time_to_last_eat > philo->time_to_die)
 	// 	{
 	// 		pthread_mutex_lock(philo->mutex_philo_said);
 	// 		printf("Philo %d died\n", philo->numer_philo); //died
 	// 		pthread_mutex_unlock(philo->mutex_philo_said);
+	//		*(philo->key_die_philo) = 1;
 	// 		return (NULL);
 	// 	}
-	// 	philo->time_to_last_eat++;
-	// 	usleep(1000);
-	// }
+	}
 	return (NULL);
 }
 
