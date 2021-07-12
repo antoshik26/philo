@@ -1,8 +1,8 @@
 #include "philo.h"
 
-int allocate(t_all_progect *all)
+int	allocate(t_all_progect *all)
 {
-	int key;
+	int	key;
 
 	key = 0;
 	all->philos = NULL;
@@ -12,19 +12,19 @@ int allocate(t_all_progect *all)
 	if (key == -1)
 		return (-1);
 	pthread_mutex_init(&all->mutex_philo_said, NULL);
-	return(0);
+	return (0);
 }
 
-void clean(t_all_progect *all)
+void	clean(t_all_progect *all)
 {
-	t_forks *fork;
-	t_forks *fork_tmp;
-	t_philo *philo;
-	t_philo *philo_tmp;
+	t_forks	*fork;
+	t_forks	*fork_tmp;
+	t_philo	*philo;
+	t_philo	*philo_tmp;
 
 	philo = all->philos;
 	fork = all->forks;
-	while(fork)
+	while (fork)
 	{
 		pthread_mutex_destroy(&fork->mutex_fork);
 		fork_tmp = fork->next;
@@ -39,9 +39,9 @@ void clean(t_all_progect *all)
 	}
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_all_progect progect;
+	t_all_progect	progect;
 
 	if (allocate(&progect))
 		return (-1);

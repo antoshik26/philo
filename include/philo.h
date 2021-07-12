@@ -8,14 +8,14 @@
 # include <pthread.h>
 # include <sys/time.h>
 
-typedef struct	s_forks
+typedef struct s_forks
 {
 	int					numer_fork;
 	pthread_mutex_t		mutex_fork;
 	struct s_forks		*next;
 }				t_forks;
 
-typedef struct			s_philo
+typedef struct s_philo
 {
 	int					numer_philo;
 	int					time_to_die;
@@ -32,7 +32,7 @@ typedef struct			s_philo
 	struct s_philo		*next;
 }						t_philo;
 
-typedef struct	s_all_progect
+typedef struct s_all_progect
 {
 	int				count_philos;
 	int				time_to_die;
@@ -43,10 +43,10 @@ typedef struct	s_all_progect
 	t_forks			*forks;
 	pthread_mutex_t	mutex_philo_said;
 	int				key_die_philo;
-	int 			eat_your_fill;
+	int				eat_your_fill;
 	struct timeval	time;
 	struct timezone	time_zone;
-}				t_all_progect;
+}					t_all_progect;
 
 int					parser(t_all_progect *all, int argc, char **argv);
 int					live_philo(t_all_progect *all);
@@ -57,4 +57,8 @@ void				ft_lstadd_back_forks(t_forks **lst, t_forks *new);
 int					ft_atoi(const char *str);
 unsigned long long	gettime_to_print(unsigned long long time_start);
 unsigned long long	gettime(void);
+int					free_forks(t_all_progect *all);
+int					init_mutex_forks(t_all_progect *all);
+int					death_philo(t_all_progect *all);
+int					check_die_philo(t_philo *philo);
 #endif

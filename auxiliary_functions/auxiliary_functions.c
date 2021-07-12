@@ -10,7 +10,7 @@ unsigned long long	gettime(void)
 	return (ms);
 }
 
-unsigned long long gettime_to_print(unsigned long long time_start)
+unsigned long long	gettime_to_print(unsigned long long time_start)
 {
 	struct timeval		time;
 	unsigned long long	ms;

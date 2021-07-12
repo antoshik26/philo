@@ -10,7 +10,15 @@
 // - Test with 4 310 200 100, a philosopher should die!
 // - Test with 2 philosophers and check the different times (a death delayed by more than 10 ms is unacceptable).
 // - Test with your values to check all the rules. Check if a philosopher dies at the right time if they don't steal forks, etc.
-
+// new_list->numer_philo = numer_philo;
+// new_list->time_to_die = all->time_to_die;
+// new_list->time_to_eat = all->time_to_eat;
+// new_list->time_to_sleap = all->time_to_sleap;
+// new_list->count_eat = all->count_philo_eat;
+// new_list->mutex_philo_said = &all->mutex_philo_said;
+// new_list->key_die_philo = &all->key_die_philo;
+// new_list->time_start = gettime();
+// new_list->time_to_last_eat = new_list->time_start;
 
 #include <stdio.h>
 #include <sys/time.h>

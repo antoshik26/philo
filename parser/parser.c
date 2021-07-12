@@ -1,13 +1,14 @@
 #include "philo.h"
 
-int checking_for_validity(t_all_progect *all)
+int	checking_for_validity(t_all_progect *all)
 {
-	if (all->count_philos <= 0 || all->time_to_die <= 0 || all->time_to_eat <= 0 || all->time_to_sleap <= 0)
+	if (all->count_philos <= 0 || all->time_to_die <= 0 || \
+			all->time_to_eat <= 0 || all->time_to_sleap <= 0)
 		return (-1);
 	return (0);
 }
 
-int parser_philo(t_all_progect *all, int argc, char **argv)
+int	parser_philo(t_all_progect *all, int argc, char **argv)
 {
 	all->count_philos = ft_atoi(argv[1]);
 	all->time_to_die = ft_atoi(argv[2]);
@@ -21,17 +22,21 @@ int parser_philo(t_all_progect *all, int argc, char **argv)
 	}
 	else
 		all->count_philo_eat = -1;
-	if (all->count_philos == -1 || all->time_to_die == -1 || all->time_to_eat == -1 || all->time_to_sleap == -1)
+	if (all->count_philos == -1 || all->time_to_die == -1 || \
+			all->time_to_eat == -1 || all->time_to_sleap == -1)
 		return (-1);
 	if (checking_for_validity(all) == -1)
+	{
+		printf("Wrong argument\n");
 		return (-1);
+	}
 	return (0);
 }
 
-int creat_fork(t_all_progect *all)
+int	creat_fork(t_all_progect *all)
 {
-	int i;
-	t_forks *fork;
+	int			i;
+	t_forks		*fork;
 
 	i = 1;
 	while (i < all->count_philos + 1)
@@ -45,11 +50,11 @@ int creat_fork(t_all_progect *all)
 	return (0);
 }
 
-int creat_philo(t_all_progect *all)
+int	creat_philo(t_all_progect *all)
 {
-	int i;
-	t_philo *philo_one;
-	
+	int			i;
+	t_philo		*philo_one;
+
 	i = 1;
 	while (i < all->count_philos + 1)
 	{
@@ -62,19 +67,19 @@ int creat_philo(t_all_progect *all)
 	return (0);
 }
 
-int parser(t_all_progect *all, int argc, char **argv)
+int	parser(t_all_progect *all, int argc, char **argv)
 {
-	int i;
-	
-	if (argc < 4 || argc > 6) 
+	int	i;
+
+	if (argc < 4 || argc > 6)
 	{
-		write(1, "Неверное количество аргументов", 30);
+		printf("Неверное количество аргументов\n");
 		return (-1);
 	}
 	i = ft_atoi(argv[1]);
 	if (i < 0)
 	{
-		write(1, "Неверное количество философов", 29);
+		printf("Неверное количество философов\n");
 		return (-1);
 	}
 	if (parser_philo(all, argc, argv) == -1)
@@ -83,5 +88,5 @@ int parser(t_all_progect *all, int argc, char **argv)
 		return (-1);
 	if (creat_philo(all) == -1)
 		return (-1);
-	return(0);
+	return (0);
 }

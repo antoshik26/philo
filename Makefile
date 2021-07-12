@@ -9,6 +9,7 @@ AUXILIARY_FUNCTIONS = auxiliary_functions
 SRCS =	${PARSER}/parser.c \
 		${LIVE_PHILO}/live_philo.c \
 		${AUXILIARY_FUNCTIONS}/auxiliary_functions.c \
+		${LIVE_PHILO}/live_philo_utils.c \
 		${AUXILIARY_FUNCTIONS}/ft_atoi.c \
 		${AUXILIARY_FUNCTIONS}/auxiliary_functions_utils.c \
 		philo.c
@@ -24,7 +25,7 @@ ${NAME}:	${OBJS}
 			gcc -o ${NAME} ${OBJS} ${INCLUDE}
 
 test:
-	gcc -g ${FLAGS} ${INCLUDE} ${PARSER}/parser.c ${LIVE_PHILO}/live_philo.c ${AUXILIARY_FUNCTIONS}/auxiliary_functions.c ${AUXILIARY_FUNCTIONS}/ft_atoi.c ${AUXILIARY_FUNCTIONS}/auxiliary_functions_utils.c philo.c
+	gcc -g ${FLAGS} ${INCLUDE} ${PARSER}/parser.c ${LIVE_PHILO}/live_philo.c ${AUXILIARY_FUNCTIONS}/auxiliary_functions.c ${AUXILIARY_FUNCTIONS}/ft_atoi.c ${AUXILIARY_FUNCTIONS}/auxiliary_functions_utils.c ${LIVE_PHILO}/live_philo_utils.c philo.c
 
 test_file:
 	gcc -g ${FLAGS} ${INCLUDE} test.c

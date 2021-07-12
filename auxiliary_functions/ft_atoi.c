@@ -1,6 +1,6 @@
 #include "philo.h"
 
-int		chek_znak(const char str, size_t *i)
+int	chek_znak(const char str, size_t *i)
 {
 	size_t	key;
 
@@ -14,7 +14,7 @@ int		chek_znak(const char str, size_t *i)
 	return (key);
 }
 
-int		ft_atoi(const char *str)
+int	ft_atoi(const char *str)
 {
 	size_t				i;
 	size_t				key;
@@ -23,7 +23,7 @@ int		ft_atoi(const char *str)
 	key = 0;
 	i = 0;
 	result = 0;
-	while ((str[i] == ' ') || (str[i] == '\t') || (str[i] == '\n') ||
+	while ((str[i] == ' ') || (str[i] == '\t') || (str[i] == '\n') || \
 			(str[i] == '\v') || (str[i] == '\f') || (str[i] == '\r'))
 		i++;
 	key = chek_znak(str[i], &i);
