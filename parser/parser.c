@@ -71,7 +71,7 @@ int	parser(t_all_progect *all, int argc, char **argv)
 {
 	int	i;
 
-	if (argc <= 4 || argc >= 6)
+	if (argc <= 4 || argc >= 7)
 	{
 		printf("Неверное количество аргументов\n");
 		return (-1);
