@@ -95,6 +95,7 @@ int	birth_philo(t_all_progect *all)
 		philo_tmp = philo_tmp->next;
 		usleep(1000);
 	}
+	check_philo(all);
 	return (0);
 }
 

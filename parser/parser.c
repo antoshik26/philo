@@ -27,7 +27,7 @@ int	parser_philo(t_all_progect *all, int argc, char **argv)
 		return (-1);
 	if (checking_for_validity(all) == -1)
 	{
-		printf("Wrong argument\n");
+		printf("Wrong argument");
 		return (-1);
 	}
 	return (0);
