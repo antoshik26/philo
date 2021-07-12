@@ -6,7 +6,7 @@
 # include <unistd.h>
 # include <stdarg.h>
 # include <pthread.h>
-#include <sys/time.h>
+# include <sys/time.h>
 
 typedef struct	s_forks
 {
@@ -43,6 +43,7 @@ typedef struct	s_all_progect
 	t_forks			*forks;
 	pthread_mutex_t	mutex_philo_said;
 	int				key_die_philo;
+	int 			eat_your_fill;
 	struct timeval	time;
 	struct timezone	time_zone;
 }				t_all_progect;

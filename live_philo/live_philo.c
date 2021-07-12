@@ -1,17 +1,17 @@
 #include "philo.h"
 
-// int check_die_philo(t_philo *philo)
-// {
-// 	if (philo->time_to_last_eat > philo->time_to_die)
-// 	{
-// 	 	pthread_mutex_lock(philo->mutex_philo_said);
-// 	 	printf("Philo %d died\n", philo->numer_philo); //died
-// 	 	pthread_mutex_unlock(philo->mutex_philo_said);
-// 		*(philo->key_die_philo) = 1;
-// 	 	return (-1);
-// 	}
-// 	return (0);
-// }
+int check_die_philo(t_philo *philo)
+{
+	if ((gettime() - philo->time_to_last_eat) > (unsigned long long)philo->time_to_die)
+	{
+	 	//pthread_mutex_lock(philo->mutex_philo_said);
+	 	printf("%llu: Philo %d died\n", gettime_to_print(philo->time_start), philo->numer_philo);//died
+	 	//pthread_mutex_unlock(philo->mutex_philo_said);
+		*(philo->key_die_philo) = 1;
+	 	return (-1);
+	}
+	return (0);
+}
 
 void *mode_of_life_philo(void *philo_one)
 {
@@ -21,16 +21,16 @@ void *mode_of_life_philo(void *philo_one)
 	while (1)
 	{
 	 	pthread_mutex_lock(&philo->left_hand->mutex_fork);
-	 	pthread_mutex_lock(philo->mutex_philo_said);
+	 	//pthread_mutex_lock(philo->mutex_philo_said);
 		printf("%llu: Philo %d take fork %d\n", gettime_to_print(philo->time_start), philo->numer_philo, philo->left_hand->numer_fork);
-	 	pthread_mutex_unlock(philo->mutex_philo_said);
+	 	//pthread_mutex_unlock(philo->mutex_philo_said);
 	 	pthread_mutex_lock(&philo->right_hand->mutex_fork);
-	 	pthread_mutex_lock(philo->mutex_philo_said);
+	 	//pthread_mutex_lock(philo->mutex_philo_said);
 	 	printf("%llu: Philo %d take fork %d\n", gettime_to_print(philo->time_start), philo->numer_philo, philo->right_hand->numer_fork);
 	 	printf("%llu: Philo %d eating\n", gettime_to_print(philo->time_start), philo->numer_philo);
-	 	usleep(philo->time_to_eat * 1000);
-		philo->time_to_last_eat = gettime();
-	 	pthread_mutex_unlock(philo->mutex_philo_said);
+	 	philo->time_to_last_eat = gettime();
+		usleep(philo->time_to_eat * 1000);
+	 	//pthread_mutex_unlock(philo->mutex_philo_said);
 	 	pthread_mutex_unlock(&philo->right_hand->mutex_fork);
 	 	pthread_mutex_unlock(&philo->left_hand->mutex_fork);
 	 	if (philo->count_eat != -1)
@@ -39,21 +39,22 @@ void *mode_of_life_philo(void *philo_one)
 	 		if (philo->count_eat == 0)
 	 			break ;
 	 	}
-	 	pthread_mutex_lock(philo->mutex_philo_said);
+	 	//pthread_mutex_lock(philo->mutex_philo_said);
 	 	printf("%llu: Philo %d sleaping\n", gettime_to_print(philo->time_start), philo->numer_philo);	//sleaping
-	 	pthread_mutex_unlock(philo->mutex_philo_said);
+	 	//pthread_mutex_unlock(philo->mutex_philo_said);
 		usleep(philo->time_to_sleap * 1000);
-		pthread_mutex_lock(philo->mutex_philo_said);
+		//pthread_mutex_lock(philo->mutex_philo_said);
 		printf("%llu: Philo %d thinkeng\n", gettime_to_print(philo->time_start), philo->numer_philo);
-		pthread_mutex_unlock(philo->mutex_philo_said);
-	 	if ((philo->time_to_last_eat - gettime()) > (unsigned long long)philo->time_to_die)
-	 	{
-			pthread_mutex_lock(philo->mutex_philo_said);
-			printf("%llu: Philo %d died\n", gettime_to_print(philo->time_start), philo->numer_philo); //died
-			pthread_mutex_unlock(philo->mutex_philo_said);
-			*philo->key_die_philo = 1;
-			return (NULL);
-	 	}
+		//pthread_mutex_unlock(philo->mutex_philo_said);
+		printf("%llu\n", (gettime() - philo->time_to_last_eat));
+	 	// if ((gettime() - philo->time_to_last_eat) > (unsigned long long)philo->time_to_die)
+	 	// {
+		// 	pthread_mutex_lock(philo->mutex_philo_said);
+		// 	printf("%llu: Philo %d died\n", gettime_to_print(philo->time_start), philo->numer_philo); //died
+		// 	pthread_mutex_unlock(philo->mutex_philo_said);
+		// 	*philo->key_die_philo = 1;
+		// 	return (NULL);
+	 	// }
 	}
 	return (NULL);
 }
@@ -119,10 +120,26 @@ int birth_philo(t_all_progect *all)
 	// }
 	while(1)
 	{
-		if (all->key_die_philo == 1)
+		philo_tmp = all->philos;
+		check_die_philo(philo_tmp);
+		if (all->key_die_philo == 1 || all->eat_your_fill == 1)
 		{
 			death_philo(all);
 			return (0);
+		}
+		all->eat_your_fill = 1;
+		while(philo_tmp)
+		{
+			if (all->eat_your_fill == 1 && philo_tmp->count_eat == 0)
+			{
+				all->eat_your_fill = 1;
+			}
+			else
+			{
+				all->eat_your_fill = 0;
+					break;
+			}
+			philo_tmp = philo_tmp->next;
 		}
 	}
 	//usleep(10000);
